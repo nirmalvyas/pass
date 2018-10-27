@@ -14,9 +14,9 @@ REDISPORT = '6379'
 REDISPWD = ""
 DB_HOST = 'localhost'
 DB_PORT = '5432'
-APP_NAME = 'production'
+APP_NAME = 'pass'
 DB_USER = 'postgres'
-DB_PASSWORD = ''
+DB_PASSWORD = 'pass'
 
 staging = False
 
