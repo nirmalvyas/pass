@@ -108,7 +108,7 @@ def user_login():
                         'status':'D'
                         })
             # create new seesion for login
-            session_id = generate_session(uuid=l.uuid)
+            session_id = generate_session(uuid=l.modhash)
             if isinstance(session_id,bool):
                 return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_USER','status':0})
             js={'status':1,'message':'login_created'}
