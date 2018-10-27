@@ -91,7 +91,7 @@ def user_login():
             if not password:
                 return json.dumps({'error':'password_IS_MANDOTRY','status':0})
             # check that user_name exits or not
-            l = User.query.filter_by(user_name=user_name).one_or_none()
+            l = User.query.filter_by(login_name=user_name).one_or_none()
             if l is None:
                 return json.dumps({'error':'USER_IS_NOT_REGISTERED','status':0})
             #authenticate password
