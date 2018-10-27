@@ -97,7 +97,7 @@ def user_login():
             #authenticate password
             exsisting_password = l.password
             print exsisting_password,password
-            if not exsisting_password == password:
+            if not str(exsisting_password).strip() == str(password).strip():
                 return json.dumps({'error':'PASSWORD_IS_INVALID','status':0})
             # check the seesion and if there is active session deactivate them
             session_id = request.cookies.get('session_id')
