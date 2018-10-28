@@ -11,12 +11,13 @@ from sqlalchemy import func, case, and_, exists, or_, desc
 from util import (authenticate, generate_password_hash, generate_session,
                   get_user_roles,id_generator)
 import psycopg2
-
+from utils import *
 user_blueprint= Blueprint('user', __name__)
 
 
 
 @user_blueprint.route('/users',methods=['POST','GET','OPTIONS'])
+@crossdomain(origin="*", headers="Content-Type")
 def user_register():
     if request.method == 'POST': 
         try:
@@ -80,6 +81,7 @@ def user_register():
 
 
 @user_blueprint.route('/user/login',methods=['POST'])
+@crossdomain(origin="*", headers="Content-Type")
 def user_login():
     if request.method == 'POST': 
         try:
@@ -87,18 +89,18 @@ def user_login():
             password = request.values.get('password')
 
             if not user_name:
-                return json.dumps({'error':'user_name_IS_MANDOTRY','status':0})
+                return json.dumps({'error':'user_name_IS_MANDOTRY','message':'User Name is Mandatory','status':0})
             if not password:
-                return json.dumps({'error':'password_IS_MANDOTRY','status':0})
+                return json.dumps({'error':'password_IS_MANDOTRY','message':'Password is Mandatory','status':0})
             # check that user_name exits or not
             l = User.query.filter_by(login_name=user_name).one_or_none()
             if l is None:
-                return json.dumps({'error':'USER_IS_NOT_REGISTERED','status':0})
+                return json.dumps({'error':'USER_IS_NOT_REGISTERED','message':'User is not registered','status':0})
             #authenticate password
             exsisting_password = l.password
             print exsisting_password,password
             if not str(exsisting_password).strip() == str(password).strip():
-                return json.dumps({'error':'PASSWORD_IS_INVALID','status':0})
+                return json.dumps({'error':'PASSWORD_IS_INVALID','message':'Password is invalid','status':0})
             # check the seesion and if there is active session deactivate them
             session_id = request.cookies.get('session_id')
             if session_id:
@@ -110,7 +112,7 @@ def user_login():
             # create new seesion for login
             session_id = generate_session(uuid=l.modhash)
             if isinstance(session_id,bool):
-                return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_USER','status':0})
+                return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_USER','message':'Something went wrong!!','status':0})
             js={'status':1,'message':'login_created'}
             resp = Response(js, status=200, mimetype='application/json')
             resp.set_cookie('session_id', session_id.session_id, expires=session_id.expiration_ttm)
@@ -121,14 +123,15 @@ def user_login():
 
         except Exception as e:
             print "==Something went wrong==",str(e)
-            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_USER','status':0})
+            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_USER','message':'Something went wrong!!','status':0})
 
     else:
-        return json.dumps({'error':'UNAUTHORISED_METHOD_FOR_ACCESS','status':0})
+        return json.dumps({'error':'UNAUTHORISED_METHOD_FOR_ACCESS','message':'Something went wrong!!','status':0})
 
 
 
 @user_blueprint.route('/user/logout',methods=['GET'])
+@crossdomain(origin="*", headers="Content-Type")
 def user_logout():
     if request.method == 'GET': 
         try:
@@ -147,12 +150,13 @@ def user_logout():
 
         except Exception as e:
             print "==Something went wrong==",str(e)
-            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_OUT_USER','status':0})
+            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_OUT_USER','message':'Something went wrong!!','status':0})
 
     else:
         return json.dumps({'error':'UNAUTHORISED_METHOD_FOR_ACCESS','status':0})
 
 @user_blueprint.route('/user/authenticate',methods=['GET'])
+@crossdomain(origin="*", headers="Content-Type")
 def user_authenticate():
     if request.method == 'GET': 
         try:
@@ -171,7 +175,7 @@ def user_authenticate():
 
         except Exception as e:
             print "==Something went wrong==",str(e)
-            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_OUT_USER','status':0})
+            return json.dumps({'error':'SOMETHING_WENT_WRONG_IN_LOGGING_OUT_USER','message':'Something went wrong!in loging out!','status':0})
 
     else:
-        return json.dumps({'error':'UNAUTHORISED_METHOD_FOR_ACCESS','status':0})
+        return json.dumps({'error':'UNAUTHORISED_METHOD_FOR_ACCESS','message':'Unauthorised method for access','status':0})

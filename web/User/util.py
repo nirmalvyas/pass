@@ -6,7 +6,8 @@ import pytz
 from pytz import timezone
 from datetime import datetime, timedelta,date
 from flask import Response
-from migrate import UserLogin,User,Role
+# from migrate import UserLogin,User,Role
+from User.models import *
 from appholder import *
 import string
 def generate_password_hash(password=False):
