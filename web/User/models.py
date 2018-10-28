@@ -48,6 +48,18 @@ class group_category(db.Model):
     status = Column(String(1), name='status', default='A')
 
 
+class UserLogin(db.Model):
+    __tablename__ = 'user_login'
+
+    id = Column(Integer, primary_key=True, name='id')
+    user_token = Column(String(100),name='user_token')
+    session_id = Column(String(100),name='session_id')
+    expiration_ttm = Column(DateTime(True),name='expiration_ttm')
+    update_dttm = Column(DateTime(True), server_default=text("now()"), name='update_dttm')
+    create_dttm = Column(DateTime(True), server_default=text("now()"), name='create_dttm')
+    status = Column(String(1), name='status', default='A')
+
+
 
 
 
