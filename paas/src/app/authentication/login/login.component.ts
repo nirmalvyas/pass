@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     console.log(this.loginform);
     if(this.loginform.valid){
+      this.submitted = true;
       let input = new FormData();
       input.append('user_name', this.loginform.value.user_name);
       input.append('password', this.loginform.value.password);
@@ -36,7 +37,6 @@ export class LoginComponent implements OnInit {
           this.message = '';
         },2000);
       });
-      this.submitted = true;
       this.loginform.reset();
       this.resetForm = false;
       setTimeout(()=>{

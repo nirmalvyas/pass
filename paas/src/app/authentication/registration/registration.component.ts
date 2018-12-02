@@ -31,6 +31,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit(){
     console.log(this.regForm);
     if(this.regForm.valid){
+      this.submitted = true;
       let dd = this.regForm.value.dob.getDate();
       let mm = this.regForm.value.dob.getMonth() + 1;
       let yyyy = this.regForm.value.dob.getFullYear();
@@ -50,14 +51,14 @@ export class RegistrationComponent implements OnInit {
           this.message = '';
         },2000);
       });
-      this.submitted = true;
+
       this.regForm.reset();
       this.resetForm = false;
       setTimeout(()=>{
         this.resetForm = true;
       },500);
     } else {
-      this.submitted = true;
+      this.submitted = false;
     }
   }
 }
