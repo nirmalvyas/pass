@@ -3,7 +3,10 @@
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'src/assets/css/custom-theme.scss';
+
+$error_color: #ff0000;
 
 .example-full-width {
   width: 100%;
@@ -11,4 +14,4 @@
 .form-group { 
   margin-bottom: 0; 
 }
-.help-block { color: #ff0000; margin:-15px 0 10px 0; font-size: 13px; display: block; }
+.help-block { color: $error_color; margin:-15px 0 10px 0; font-size: 13px; display: block; }
