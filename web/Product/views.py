@@ -8,11 +8,9 @@ import datetime
 from appholder import *
 from Product.models import Products
 from sqlalchemy import func, case, and_, exists, or_, desc
-import psycopg2
 from utils import *
+import psycopg2
 product_blueprint= Blueprint('product', __name__)
-
-
 
 @product_blueprint.route('/products',methods=['POST','GET','OPTIONS'])
 @crossdomain(origin="*", headers="Content-Type")

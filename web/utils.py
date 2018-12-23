@@ -1,6 +1,3 @@
-
-
-
 from flask import Blueprint, render_template
 from flask import Flask, request, flash, redirect, url_for, render_template, abort, Response, json, jsonify, make_response, current_app, g, session
 
