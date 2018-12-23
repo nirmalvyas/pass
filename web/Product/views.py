@@ -53,7 +53,7 @@ def products():
             # create entry in the session
             # and make user login
             # store session/token in the cookies
-            return json.dumps({'message':'user inserted successfully','status':1})
+            return json.dumps({'message':'Products inserted successfully','status':1})
 
         except Exception as e: 
             print "==Something went wrong==",str(e)
