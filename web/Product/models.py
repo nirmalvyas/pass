@@ -7,7 +7,7 @@ from sqlalchemy import Column, DateTime, Integer, String, text,Float,Date
     
 
 class Products(db.Model):
-    __tablename__ = 'product'
+    __tablename__ = 'products'
 
     id = Column(Integer, primary_key=True, name='id')
     product_name = Column(String(50), name='product_name')
