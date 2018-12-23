@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+      <div class="loginForm p-15 mt-5 mx-auto col-md-4 col-sm-6 col-xs-12">
+          <div class="alert alert-success" role="alert" *ngIf="message">
+              {{message}}
+            </div>
+          <form [formGroup]="loginform" (ngSubmit)="onSubmit()" *ngIf="resetForm">
+            <h5>Login Form</h5>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Enter Username" formControlName="user_name">
+                </mat-form-field>
+                <span class="help-block" *ngIf="!loginform.get('user_name').valid && (!submitted || loginform.get('user_name').touched)">Username Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Enter Password" formControlName="password">
+                </mat-form-field>
+                <span class="help-block" *ngIf="!loginform.get('password').valid && (!submitted || loginform.get('password').touched)">Password Field is required</span>
+              </div>
+              <button mat-raised-button class="float-left" color="primary">Submit</button>
+              <a class="float-right" routerLink="/register">Create an acccount</a>
+              <div class="clearfix"></div>
+          </form>
+        </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+      <div class="regForm p-15 mt-5 mx-auto col-md-4 col-sm-6 col-xs-12">
+          <div class="alert alert-success" role="alert" *ngIf="message">
+              {{message}}
+            </div>
+          <form [formGroup]="regForm" (ngSubmit)="onSubmit()" *ngIf="resetForm">
+            <h5>Registration Form</h5>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                  <input matInput placeholder="First Name" formControlName="first_name">
+                </mat-form-field>
+                <span class="help-block" *ngIf="!regForm.get('first_name').valid && (!submitted || regForm.get('first_name').touched)">Firstname Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Last name" formControlName="last_name">
+              </mat-form-field>
+              <span class="help-block" *ngIf="!regForm.get('last_name').valid && (!submitted || regForm.get('last_name').touched)">Lastname Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+              <span class="help-block" *ngIf="!regForm.get('email').valid && (!submitted || regForm.get('email').touched)">Email Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Pancard" minlength="10" maxlength="10" formControlName="pan_number">
+              </mat-form-field>
+              <span class="help-block" *ngIf="!regForm.get('pan_number').valid && (!submitted || regForm.get('pan_number').touched)">Pancard Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Mobile" minlength="10" maxlength="10" formControlName="mobile">
+              </mat-form-field>
+              <span class="help-block" *ngIf="!regForm.get('mobile').valid && (!submitted || regForm.get('mobile').touched)">Mobile Field is required</span>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              <span class="help-block" *ngIf="!regForm.get('dob').valid && (!submitted || regForm.get('dob').touched)">DOB Field is required</span>
+            </div>
+              <button mat-raised-button color="primary">Submit</button>
+          </form>
+        </div>
+  </div>
+</div>
