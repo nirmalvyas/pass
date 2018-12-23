@@ -8,6 +8,7 @@ import json
 import psycopg2
 # app.register_blueprint(role_blueprint)
 app.register_blueprint(user_blueprint)
+app.register_blueprint(product_blueprint)
 
 @app.before_request     
 def before_request():
