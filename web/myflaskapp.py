@@ -1,6 +1,7 @@
 from appholder import *
 # from Role.view import role_blueprint
 from User.view import user_blueprint
+from Product.views import product_blueprint
 
 from flask import g
 import json
